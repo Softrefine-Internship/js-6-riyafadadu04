@@ -9,7 +9,7 @@ const timeOut = function(sec){
     });
 }
 
-const fetchData = async function(url, timeoutTime) {
+const fetchData = async function(url) {
     try {
         const response = await fetch(url);
         if (!response.ok) {

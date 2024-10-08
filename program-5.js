@@ -10,14 +10,23 @@ const urls = [
 const MultiUrlData = async function (urls) {
   try {
     var promises = await Promise.all(
-      urls.map(async (url) => {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        return data;
-      })
+      // urls.map(async (url) => {
+      //   const response = await fetch(url);
+      //   if (!response.ok) {
+      //     throw new Error(`HTTP error! status: ${response.status}`);
+      //   }
+      //   const data = await response.json();
+      //   return data;
+      // })
+      urls.map((url) => 
+        fetch(url)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+          })
+      )
     );
     promises = promises.map(recipes => recipes.data.recipe.title);
     console.log(promises); 

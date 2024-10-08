@@ -14,12 +14,11 @@ const downloadUrls = async function (urls) {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      const data = await response.json();
-      return data;
+      return response.json();
     });
-    let results = await Promise.all(promises);
-    results = results.map(async (recipes) => {
-      console.log(`Downloaded recipe: ${recipes.data.recipe.title}`);
+    let results = await Promise.allSettled(promises);
+    results = results.map((recipes) => {
+      console.log(`Downloaded recipe: ${recipes.value.data.recipe.title}`);
     });
     return results;
   } catch (error) {
