@@ -24,7 +24,7 @@ const fetchData = async function(url) {
 
 const fetchDataWithTimeout = async function(url, timeoutTime) {
     try {
-        const response = await Promise.race([fetchData(url, timeoutTime), timeOut(timeoutTime)]);
+        const response = await Promise.race([fetchData(url), timeOut(timeoutTime)]);
         console.log(response.data.recipe.title);
         return response;
     } catch (error) {
